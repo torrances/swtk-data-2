@@ -1,0 +1,7 @@
+target/
+.settings/
+bin/
+log/
+*.xml~
+/Library/generated
+/Library/generated/

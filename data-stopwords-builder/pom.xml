@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>data-stopwords</groupId>
+	<artifactId>data-stopwords</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+
+	<url />
+	<name>SWTK Stopwords</name>
+	<inceptionYear>2016</inceptionYear>
+	<description>SWTK Linguistic Stopwords</description>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.2</version>
+			</plugin>
+		</plugins>
+	</build>
+
+	<modules>
+		<module>../data-stopwords-core</module>
+		<module>../data-stopwords-mda</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.swtk.data.stopwords.core</groupId>
+			<artifactId>data-stopwords-core</artifactId>
+			<version>1.0.0.</version>
+		</dependency>
+		<dependency>
+			<groupId>org.swtk.data.stopwords.mda</groupId>
+			<artifactId>data-stopwords-mda</artifactId>
+			<version>1.0.0.</version>
+		</dependency>
+	</dependencies>
+
+</project>
