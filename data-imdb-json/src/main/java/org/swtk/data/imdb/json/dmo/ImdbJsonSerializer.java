@@ -18,12 +18,16 @@ public class ImdbJsonSerializer {
 		return instance;
 	}
 
-	public static ImdbTitle toObj(String imdbTitle) {
-		return GsonUtils.toObject(imdbTitle, ImdbTitle.class);
+	public static String minify(ImdbTitle imdbTitle) {
+		return GsonUtils.toJsonSingleLineAll(imdbTitle);
 	}
 
-	public static String toPrettyString(ImdbTitle imdbTitle) {
+	public static String pretty(ImdbTitle imdbTitle) {
 		return GsonUtils.toJsonFormatted(imdbTitle);
+	}
+
+	public static ImdbTitle toObj(String imdbTitle) {
+		return GsonUtils.toObject(imdbTitle, ImdbTitle.class);
 	}
 
 	private ImdbJsonSerializer() {

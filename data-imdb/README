@@ -1,0 +1,30 @@
+14-Jan-2016
+currently not well choreographed, but functional
+
+"data-imdb-scrape"
+- multiple HTML files per movie are downloaded
+- text is extracted on a 1..1 file basis into DAT files
+- data is combined into a single JSON and written to disk
+
+"data-imdb-parse"
+- imports the single JSON and post-processes it and writes minified version to disk
+
+"data-imdb-mda"
+- not being used ... too hard to get complex data like this in binary format
+
+"data-imdb-mongo-populate"
+- not a maven project; won't show up here
+- contains python scripts
+
+	$ python populate.py 100 <path> imdb col1 -v
+		$python populate.py 100 /Users/craigtrim/data/Data/imdb/json-2/ imdb col1 -v
+		*Found Files in Path (input_path =  /Users/craigtrim/data/Data/imdb/json-2/ , total-files =  61729 )
+		loaded line:  100
+		loaded line:  200
+		loaded line:  300
+		loaded line:  400
+		loaded line:  500
+		loaded line:  600
+		loaded line:  700
+		loaded line:  800
+		etc

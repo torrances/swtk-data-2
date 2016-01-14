@@ -1,7 +1,5 @@
 package org.swtk.data.imdb.scrape;
 
-import java.io.File;
-
 import org.swtk.data.imdb.json.dto.RunnerContract;
 import org.swtk.data.imdb.json.dto.adapter.RunnerContractAdapter;
 import org.swtk.data.imdb.scrape.svc.SavePage;
@@ -26,10 +24,10 @@ public class Runner {
 			final String ID = "tt" + temp;
 
 			String path = new SavePage().getPath(ID, contract.getBaseDirectory(), "all", "json");
-			if (new File(path).exists()) {
-				logger.debug("ID already exists (id = %s)", ID);
-				continue;
-			}
+			//			if (new File(path).exists()) {
+			//				logger.debug("ID already exists (id = %s)", ID);
+			//				continue;
+			//			}
 
 			String jsonResults = new ScrapeMovie().process(ID, contract);
 			FileUtils.toFile(jsonResults, path, Codepage.UTF_8);

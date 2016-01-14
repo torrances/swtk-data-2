@@ -78,6 +78,6 @@ public class ScrapeMovie {
 			logger.error("Exception (id = %s, type = %s, message = %s", ID, "ratings", e.getMessage());
 		}
 
-		return ImdbJsonSerializer.toPrettyString(imdbTitle);
+		return ImdbJsonSerializer.minify(imdbTitle);
 	}
 }

@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.swtk.data.imdb.mda</groupId>
+	<artifactId>data-imdb-mda</artifactId>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
+
+	<url/>
+	<name>IMDB MDA</name>
+	<inceptionYear>2015</inceptionYear>
+	<description>IMDB MDA</description>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<inherited>true</inherited>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.swtk.data.imdb.core</groupId>
+			<artifactId>data-imdb-core</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.swtk.data.imdb.json</groupId>
+			<artifactId>data-imdb-json</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>trimc-commons</groupId>
+			<artifactId>trimc-commons</artifactId>
+			<version>1.0.0</version>
+			<type>pom</type>
+		</dependency>
+	</dependencies>
+
+</project>
+  

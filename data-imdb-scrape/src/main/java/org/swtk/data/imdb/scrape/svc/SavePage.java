@@ -43,17 +43,20 @@ public class SavePage {
 		return sb.toString();
 	}
 
-	public SavePageResult process(final String URL, final String ID, String base, String type)
-			throws BusinessException {
+	public SavePageResult process(final String URL, final String ID, String base, String type) throws BusinessException {
 
 		SavePageResult savePageResult = new SavePageResult();
-
 		savePageResult.setInFile(String.format("%s", URL, type));
 
 		savePageResult.setOutHtml(new File(getPath(ID, base, type, "html")));
 		savePageResult.setOutDat(new File(getPath(ID, base, type, "dat")));
 		savePageResult.setOutJson(new File(getPath(ID, base, type, "json")));
 
+		/**
+		 * 	14-Jan-2016, important to keep this logic
+		 * 	many movies have sections that aren't filled out
+		 * 	so if any empty DAT files exists, we've been through this before ...
+		 */
 		if (savePageResult.getOutDat().exists()) {
 			logger.debug("File already exists (type = %s, id = %s, type = %s)", "dat", ID, type);
 			savePageResult.setProcessed(true);
@@ -66,10 +69,11 @@ public class SavePage {
 				FileUtils.copyURLToFile(new URL(savePageResult.getInFile()), savePageResult.getOutHtml());
 
 			} catch (IOException e) {
-				logger.error(e);
-				throw new BusinessException("Unable to download HTML page (url = %s, type = %s)",
-						savePageResult.getOutHtml(), type);
+				throw new BusinessException("Unable to download HTML page (url = %s, type = %s, is-403 = %s)", savePageResult.getOutHtml(), type, error(e));
 			}
+
+		} else {
+			logger.debug("File already exists (ext = html, id = %s, type = %s)", ID, type);
 		}
 
 		try {
@@ -78,11 +82,16 @@ public class SavePage {
 
 		} catch (IOException e) {
 			logger.error(e);
-			throw new BusinessException("Unable to create Jsoup Document (url = %s, type = %s)",
-					savePageResult.getOutHtml(), type);
+			throw new BusinessException("Unable to create Jsoup Document (url = %s, type = %s)", savePageResult.getOutHtml(), type);
 		}
 
 		savePageResult.setProcessed(false);
 		return savePageResult;
+	}
+	
+	private String error(IOException e) {
+		if (e.getMessage().contains("403")) return "403";
+		if (e.getMessage().contains("FileNotFound")) return "file-not-found";
+		return e.getMessage();
 	}
 }

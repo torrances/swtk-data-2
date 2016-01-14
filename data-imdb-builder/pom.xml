@@ -27,7 +27,6 @@
 		<module>../data-imdb-core</module>
 		<module>../data-imdb-json</module>
 		<module>../data-imdb-scrape</module>
-		<module>../data-imdb-export</module>
 	</modules>
 
 	<properties>
@@ -52,8 +51,8 @@
 			<version>1.0.0</version>
 		</dependency>
 		<dependency>
-			<groupId>org.swtk.data.imdb.export</groupId>
-			<artifactId>data-imdb-export</artifactId>
+			<groupId>org.swtk.data.imdb.parse</groupId>
+			<artifactId>data-imdb-parse</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 	</dependencies>

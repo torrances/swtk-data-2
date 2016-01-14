@@ -22,8 +22,7 @@ public class RetrieveCastMembers {
 
 	private static String getCharacter(Element element) {
 		for (Element sibling : element.siblingElements())
-			if ("character".equals(sibling.attr("class")))
-				return StringUtils.trim(sibling.text());
+			if ("character".equals(sibling.attr("class"))) return StringUtils.trim(sibling.text());
 		return null;
 	}
 
@@ -34,14 +33,12 @@ public class RetrieveCastMembers {
 
 			String character = getCharacter(element);
 			boolean isCredited = character.contains("uncredited") ? false : true;
-			character = (StringUtils.contains(character, "(")) ? StringUtils.substringBefore(character, "(").trim()
-					: character;
+			character = (StringUtils.contains(character, "(")) ? StringUtils.substringBefore(character, "(").trim() : character;
 
 			boolean isStar = false;
 
 			for (String aCharacter : character.split("/")) {
-				castMembers.add(CastMemberAdapter.transform(element.text(), aCharacter, element.attr("itemprop"),
-						isCredited, isStar));
+				castMembers.add(CastMemberAdapter.transform(element.text(), aCharacter, element.attr("itemprop"), isCredited, isStar));
 			}
 		}
 
