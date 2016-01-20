@@ -53,7 +53,7 @@ public class RetrieveTaglines {
 
 		Taglines taglines = parse(savePageResult.getDoc());
 		if (taglines.isEmpty()) {
-			logger.error("No Results Found (id = %s", id);
+			logger.trace("No Results Found (id = %s", id);
 			return taglines;
 		}
 

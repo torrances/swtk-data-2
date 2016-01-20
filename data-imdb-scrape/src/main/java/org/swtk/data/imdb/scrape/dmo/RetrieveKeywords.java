@@ -54,7 +54,7 @@ public class RetrieveKeywords {
 		Keywords keywords = parse(savePageResult.getDoc());
 
 		if (keywords.isEmpty()) {
-			logger.error("No Results Found (id = %s", id);
+			logger.trace("No Results Found (id = %s", id);
 			return keywords;
 		}
 

@@ -52,7 +52,7 @@ public class RetrieveCastMembers {
 
 		CastMembers castMembers = parse(savePageResult.getDoc());
 		if (castMembers.isEmpty()) {
-			logger.error("No Results Found (id = %s", id);
+			logger.trace("No Results Found (id = %s", id);
 			return castMembers;
 		}
 

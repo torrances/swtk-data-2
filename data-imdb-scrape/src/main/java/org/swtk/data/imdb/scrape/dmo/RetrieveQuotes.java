@@ -60,7 +60,7 @@ public class RetrieveQuotes {
 
 		Quotations quotations = parse(savePageResult.getDoc());
 		if (quotations.isEmpty()) {
-			logger.error("No Results Found (id = %s", id);
+			logger.trace("No Results Found (id = %s", id);
 			return quotations;
 		}
 

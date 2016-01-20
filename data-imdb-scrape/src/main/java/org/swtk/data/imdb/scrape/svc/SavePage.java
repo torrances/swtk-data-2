@@ -69,7 +69,7 @@ public class SavePage {
 				FileUtils.copyURLToFile(new URL(savePageResult.getInFile()), savePageResult.getOutHtml());
 
 			} catch (IOException e) {
-				throw new BusinessException("Unable to download HTML page (url = %s, type = %s, is-403 = %s)", savePageResult.getOutHtml(), type, error(e));
+				throw new BusinessException("Unable to download HTML page (url = %s, type = %s, error = %s)", savePageResult.getOutHtml(), type, error(e));
 			}
 
 		} else {

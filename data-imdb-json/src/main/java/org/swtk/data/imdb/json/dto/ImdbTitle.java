@@ -84,6 +84,30 @@ public class ImdbTitle {
 		return userRatings;
 	}
 
+	public boolean hasMovies() {
+		return null != getMovies() && !getMovies().isEmpty();
+	}
+
+	public boolean hasPlotSummaries() {
+		return null != getPlotSummaries() && !getPlotSummaries().isEmpty();
+	}
+
+	public boolean hasQuotations() {
+		return null != getQuotations() && !getQuotations().isEmpty();
+	}
+
+	public boolean hasSynopses() {
+		return null != getSynopses() && !getSynopses().isEmpty();
+	}
+
+	public boolean hasTaglines() {
+		return null != getTaglines() && !getTaglines().isEmpty();
+	}
+
+	public boolean hasUserRatings() {
+		return null != getUserRatings() && !getUserRatings().isEmpty();
+	}
+
 	public void setCastMembers(CastMembers castMembers) {
 		this.castMembers = castMembers;
 	}

@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.swtk.data.imdb.core</groupId>
@@ -7,7 +6,7 @@
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<url />
+	<url/>
 	<name>IMDB Core</name>
 	<inceptionYear>2015</inceptionYear>
 	<description>IMDB Core Project</description>
@@ -64,6 +63,12 @@
 		<dependency>
 			<groupId>trimc-commons</groupId>
 			<artifactId>trimc-commons</artifactId>
+			<version>1.0.0</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>swtk-eng</groupId>
+			<artifactId>swtk-eng</artifactId>
 			<version>1.0.0</version>
 			<type>pom</type>
 		</dependency>

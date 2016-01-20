@@ -103,7 +103,7 @@ public class RetrieveUserRatings {
 
 		UserRatings userRatings = parse(id, savePageResult.getDoc());
 		if (userRatings.isEmpty()) {
-			logger.error("No Results Found (id = %s", id);
+			logger.trace("No Results Found (id = %s", id);
 			return userRatings;
 		}
 

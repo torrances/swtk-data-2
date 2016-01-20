@@ -93,7 +93,7 @@ public class RetrieveMovie {
 
 		Movies movies = parse(savePageResult.getDoc());
 		if (movies.isEmpty()) {
-			logger.error("No Results Found (id = %s", id);
+			logger.trace("No Results Found (id = %s", id);
 			return movies;
 		}
 

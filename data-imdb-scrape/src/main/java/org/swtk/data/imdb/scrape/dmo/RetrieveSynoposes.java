@@ -39,7 +39,7 @@ public class RetrieveSynoposes {
 
 		Synopses synopses = parse(savePageResult.getDoc());
 		if (synopses.isEmpty()) {
-			logger.error("No Results Found (id = %s", id);
+			logger.trace("No Results Found (id = %s", id);
 			return synopses;
 		}
 

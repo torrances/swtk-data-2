@@ -24,7 +24,7 @@ public class Movie {
 
 	@Expose
 	private Collection<String> stars;
-	
+
 	@Expose
 	private String title;
 
@@ -92,6 +92,14 @@ public class Movie {
 	public Collection<String> getWriters() {
 		if (null == writers) setWriters(new ArrayList<String>());
 		return writers;
+	}
+
+	public boolean hasDescription() {
+		return null != getDescription() && !getDescription().isEmpty();
+	}
+
+	public boolean hasGenres() {
+		return null != getGenres() && !getGenres().isEmpty();
 	}
 
 	@Override

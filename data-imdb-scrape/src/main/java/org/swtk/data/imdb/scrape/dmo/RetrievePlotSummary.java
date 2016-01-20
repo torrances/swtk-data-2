@@ -38,7 +38,7 @@ public class RetrievePlotSummary {
 
 		PlotSummaries plotSummaries = parse(savePageResult.getDoc());
 		if (plotSummaries.isEmpty()) {
-			logger.error("No Results Found (id = %s", id);
+			logger.trace("No Results Found (id = %s", id);
 			return plotSummaries;
 		}
 

@@ -12,9 +12,9 @@ import com.trimc.blogger.commons.utils.GsonUtils;
 import com.trimc.blogger.commons.utils.file.FileUtils;
 import com.trimc.blogger.commons.utils.string.StringUtils;
 
-public class PostProcessJson {
+public class MinifyJsonForMongodb {
 
-	public static LogManager logger = new LogManager(PostProcessJson.class);
+	public static LogManager logger = new LogManager(MinifyJsonForMongodb.class);
 
 	private static ImdbTitle deserialize(File file) throws BusinessException {
 		String json = FileUtils.toString(file, Codepage.UTF_8);
