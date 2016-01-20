@@ -26,6 +26,8 @@ public final class ParseDatFile {
 		Set<String> set = new TreeSet<String>();
 		Path out = Paths.get("/Users/craigtrim/data/Data/twitter/out.dat");
 
+		int ctr = 1;
+		
 		try (BufferedReader br = new BufferedReader(new FileReader(new File("/Users/craigtrim/data/Data/twitter/20160119_0644.dat")))) {
 			String line;
 
@@ -38,7 +40,8 @@ public final class ParseDatFile {
 
 				try {
 					Tweet tweet = new TransformGnipTweet().transform(StringUtils.trim(sb.toString()));
-					if (tweet.hasText()) set.add(tweet.getNormalizedNoHashtagsOrURLs());
+					String key = StringUtils.pad(ctr++, 5);
+					if (tweet.hasText()) set.add(key + " " + tweet.getNormalizedNoHashtagsOrURLs());
 
 				} catch (Exception e) {
 					logger.error(e, line);
