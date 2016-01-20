@@ -37,6 +37,11 @@
 			<artifactId>data-fb-core</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.gistlabs</groupId>
+			<artifactId>mechanize</artifactId>
+			<version>2.0.0-RC1</version>
+		</dependency>
 	</dependencies>
 
 </project>
