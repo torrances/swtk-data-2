@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>data-rotten-tomatoes</groupId>
+	<artifactId>data-rotten-tomatoes</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+
+	<url />
+	<name>SWTK Rotten Tomatoes</name>
+	<inceptionYear>2016</inceptionYear>
+	<description>SWTK Rotten Tomatoes</description>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.2</version>
+			</plugin>
+		</plugins>
+	</build>
+
+	<modules>
+		<module>../data-rt-core</module>
+		<module>../data-rt-scraper</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.swtk.data.rt.core</groupId>
+			<artifactId>data-rt-core</artifactId>
+			<version>1.0.0.</version>
+		</dependency>
+		<dependency>
+			<groupId>org.swtk.data.rt.scrape</groupId>
+			<artifactId>data-rt-scraper</artifactId>
+			<version>1.0.0.</version>
+		</dependency>
+	</dependencies>
+
+</project>

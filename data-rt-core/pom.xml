@@ -1,15 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.swtk.data.twitter.gnip.parse</groupId>
-	<artifactId>data-twitter-gnip-parse</artifactId>
+	<groupId>org.swtk.data.rt.core</groupId>
+	<artifactId>data-rt-core</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
 	<url/>
-	<name>Twitter GNIP Parser</name>
+	<name>RT Core</name>
 	<inceptionYear>2015</inceptionYear>
-	<description>Twitter GNIP Parser</description>
+	<description>RT Core Project</description>
 
 	<build>
 		<plugins>
@@ -33,14 +33,26 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.swtk.data.twitter.core</groupId>
-			<artifactId>data-twitter-core</artifactId>
+			<groupId>trimc-commons</groupId>
+			<artifactId>trimc-commons</artifactId>
 			<version>1.0.0</version>
+			<type>pom</type>
 		</dependency>
 		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-			<version>1.9</version>
+			<groupId>swtk-eng</groupId>
+			<artifactId>swtk-eng</artifactId>
+			<version>1.0.0</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.8.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.4</version>
 		</dependency>
 	</dependencies>
 

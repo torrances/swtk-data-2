@@ -43,7 +43,7 @@ public class TransformGnipTweet {
 
 		String normalized = tweet.getText().toLowerCase();
 		normalized = TextUtils.removePunctuationExcept(normalized, ' ');
-		normalized = TextUtils.removeSpecialCharactersExcept(normalized, ' ');
+		normalized = TextUtils.removeSpecialCharacters(normalized);
 
 		Set<String> hashtags = new TreeSet<String>();
 

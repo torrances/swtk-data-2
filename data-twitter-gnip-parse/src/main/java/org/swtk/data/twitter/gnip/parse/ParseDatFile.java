@@ -3,31 +3,38 @@ package org.swtk.data.twitter.gnip.parse;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
+import java.util.TreeMap;
 
 import org.swtk.data.twitter.core.dmo.TransformGnipTweet;
 import org.swtk.data.twitter.core.dto.generic.Tweet;
 
 import com.trimc.blogger.commons.LogManager;
-import com.trimc.blogger.commons.type.Codepage;
+import com.trimc.blogger.commons.exception.BusinessException;
+import com.trimc.blogger.commons.utils.SetUtils;
 import com.trimc.blogger.commons.utils.string.StringUtils;
 
 public final class ParseDatFile {
 
 	public static LogManager logger = new LogManager(ParseDatFile.class);
 
-	public static void main(String... args) throws Throwable {
+	//	public static int ctr = 1;
 
-		Set<String> set = new TreeSet<String>();
-		Path out = Paths.get("/Users/craigtrim/data/Data/twitter/out.dat");
+	public static Map<Integer, String> map = new TreeMap<Integer, String>();
 
-		int ctr = 1;
-		
+	//	private static String key(int ctr) {
+	//		return "1" + StringUtils.pad(ctr, 5);
+	//	}
+
+	public static void main(String... args) throws Throwable {}
+
+	public Set<String> process(int min, int max) throws Throwable {
+
+		// Path out = Paths.get("/Users/craigtrim/data/Data/twitter/out.dat");
+
+		int lineCounter = 0;
+
 		try (BufferedReader br = new BufferedReader(new FileReader(new File("/Users/craigtrim/data/Data/twitter/20160119_0644.dat")))) {
 			String line;
 
@@ -35,27 +42,49 @@ public final class ParseDatFile {
 			while ((line = br.readLine()) != null) {
 				if (!StringUtils.hasValue(line)) continue;
 
+				if (lineCounter < min || lineCounter > max) continue;
+				lineCounter++;
+
 				sb.append(line);
 				if (!line.endsWith("}")) continue;
 
 				try {
+
 					Tweet tweet = new TransformGnipTweet().transform(StringUtils.trim(sb.toString()));
-					String key = StringUtils.pad(ctr++, 5);
-					if (tweet.hasText()) set.add(key + " " + tweet.getNormalizedNoHashtagsOrURLs());
+
+					String text = tweet.getNormalizedNoHashtagsOrURLs();
+					if (StringUtils.hasValue(text) && text.length() > 10) {
+						map.put(hash(text), text);
+					}
 
 				} catch (Exception e) {
 					logger.error(e, line);
+					throw new BusinessException("Unable to deserialize line:\n\t%s", sb.toString());
 				}
 
-				if (set.size() > 10000) {
-					Files.write(out, set, Codepage.UTF_8.getCharset(), StandardOpenOption.APPEND, StandardOpenOption.CREATE);
-					set = new TreeSet<String>();
-				}
+				//				if (map.keySet().size() > 500000) {
+				////					writeToFile(map, out);
+				//					map = new TreeMap<Integer, String>();
+				//				}
 
-				sb = new StringBuilder();
+				//				sb = new StringBuilder();
 			}
 		}
 
-		Files.write(out, set, Codepage.UTF_8.getCharset(), StandardOpenOption.APPEND, StandardOpenOption.CREATE);
+		return SetUtils.toSet(map.values());
 	}
+
+	private static int hash(String text) {
+		int hash = text.hashCode();
+		return (hash > 0) ? hash : hash * -1;
+	}
+
+	//	private static void writeToFile(Map<Integer, String> map, Path out) throws IOException {
+	//		Set<String> list = new TreeSet<String>();
+	//		for (Integer key : map.keySet()) {
+	//			list.add(key + " " + map.get(key));
+	//		}
+	//
+	//		Files.write(out, list, Codepage.UTF_8.getCharset(), StandardOpenOption.APPEND, StandardOpenOption.CREATE);
+	//	}
 }
