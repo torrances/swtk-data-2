@@ -3,9 +3,9 @@ package org.swtk.data.twitter.core.dmo;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.swtk.data.twitter.core.dto.generic.Tweet;
-import org.swtk.data.twitter.core.dto.v1.TweetGnip;
-import org.swtk.data.twitter.core.dto.v1.adapter.TweetGnipAdapter;
+import org.swtk.data.twitter.core.dto.canonical.CannonicalTweet;
+import org.swtk.data.twitter.core.dto.gnip.GnipTweet;
+import org.swtk.data.twitter.core.dto.gnip.adapter.GnipTweetAdapter;
 import org.swtk.eng.tokenizer.text.TextTokenizer;
 
 import com.trimc.blogger.commons.LogManager;
@@ -19,15 +19,15 @@ public class TransformGnipTweet {
 
 	public static LogManager logger = new LogManager(TransformGnipTweet.class);
 
-	public Tweet transform(String text) throws BusinessException {
+	public CannonicalTweet transform(String text) throws BusinessException {
 		try {
 
 			/*	GNIP format	*/
 			if (text.startsWith("{\"id\":\"")) {
-				return transform(TweetGnipAdapter.transform(text));
+				return transform(GnipTweetAdapter.transform(text));
 			}
 
-			return GsonUtils.toObject(text, Tweet.class);
+			return GsonUtils.toObject(text, CannonicalTweet.class);
 
 		} catch (Exception e) {
 			logger.error(e);
@@ -35,8 +35,8 @@ public class TransformGnipTweet {
 		}
 	}
 
-	public Tweet transform(TweetGnip tweetGnip) throws BusinessException {
-		Tweet tweet = new Tweet();
+	public CannonicalTweet transform(GnipTweet tweetGnip) throws BusinessException {
+		CannonicalTweet tweet = new CannonicalTweet();
 
 		tweet.setText(StringUtils.trim(tweetGnip.getBody()));
 		tweet.setUser(tweetGnip.getActor().getPreferredUsername());

@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.swtk.data.twitter.core.dmo.TransformGnipTweet;
-import org.swtk.data.twitter.core.dto.generic.Tweet;
+import org.swtk.data.twitter.core.dto.canonical.CannonicalTweet;
 
 import com.trimc.blogger.commons.LogManager;
 import com.trimc.blogger.commons.exception.BusinessException;
@@ -39,7 +39,7 @@ public final class DeserializeTweets {
 
 				try {
 
-					Tweet tweet = new TransformGnipTweet().transform(strTweet);
+					CannonicalTweet tweet = new TransformGnipTweet().transform(strTweet);
 					String text = tweet.getNormalizedNoHashtagsOrURLs();
 					
 					if (text.length() < 0) continue;

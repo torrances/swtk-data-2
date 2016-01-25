@@ -26,6 +26,7 @@
 	<modules>
 		<module>../data-rt-core</module>
 		<module>../data-rt-scraper</module>
+		<module>../data-rt-parser</module>
 	</modules>
 
 	<properties>
@@ -42,6 +43,11 @@
 		<dependency>
 			<groupId>org.swtk.data.rt.scrape</groupId>
 			<artifactId>data-rt-scraper</artifactId>
+			<version>1.0.0.</version>
+		</dependency>
+		<dependency>
+			<groupId>org.swtk.data.rt.parse</groupId>
+			<artifactId>data-rt-parser</artifactId>
 			<version>1.0.0.</version>
 		</dependency>
 	</dependencies>
