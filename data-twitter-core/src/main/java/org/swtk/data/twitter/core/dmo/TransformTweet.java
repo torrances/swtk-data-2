@@ -78,6 +78,6 @@ public class TransformTweet {
 			logger.error(e);
 		}
 
-		throw new BusinessException("Unable to deserialize tweet (target-format = 'gnip', length = %s)", text.length());
+		throw new BusinessException("Unable to deserialize tweet (target-format = 'gnip', length = %s):\n\t%s", text.length(), text);
 	}
 }

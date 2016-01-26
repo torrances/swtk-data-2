@@ -24,9 +24,17 @@ public final class GnipTweetAdapter {
 		try {
 			return GsonUtils.toObject(text, GnipTweet.class);
 
-		} catch (Exception e) {
-			logger.error(e);
-			throw new AdapterValidationException("Unable to deserialize tweet (expected-type = 'gnip', length = %s)", text.length());
+		} catch (Exception e1) {
+
+			/**
+			 * 	Purpose:
+			 * 	it's possible the tweet is missing a termininating "}"
+			 */
+			try {
+				return transform(text.concat("}"));
+			} catch (Exception e2) {
+				throw new AdapterValidationException("Unable to deserialize tweet (expected-type = 'gnip-2', length = %s):\n\t%s", text.length(), text);
+			}
 		}
 	}
 }

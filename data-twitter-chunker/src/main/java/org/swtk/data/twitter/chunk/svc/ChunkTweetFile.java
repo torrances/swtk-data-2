@@ -26,7 +26,7 @@ public class ChunkTweetFile {
 		for (File file : files)
 			totalNumberOfLines += FileUtils.numberOfLines(file);
 
-		logger.info("Read File (number-of-files = %s, number-of-lines = %s, time-to-read = %s)", StringUtils.format(files.size()), StringUtils.format(totalNumberOfLines), timer.getTotalTime());
+		logger.info("Read File:\n\tnumber-of-files = %s\n\tnumber-of-lines = %s\n\ttime-to-read = %s", StringUtils.format(files.size()), StringUtils.format(totalNumberOfLines), timer.getTotalTime());
 		return totalNumberOfLines;
 	}
 
@@ -41,11 +41,13 @@ public class ChunkTweetFile {
 
 	public void process(ChunkTweetFileContract contract) throws BusinessException {
 
+		Stopwatch timer = new Stopwatch();
 		final long numberOfLines = getNumberOfLines(contract.getInputFiles());
 
 		for (File file : contract.getInputFiles()) {
-			logger.info("Processing File: %s", file.getAbsolutePath());
+			logger.debug("Processing File: %s", file.getAbsolutePath());
 
+			int actualLines = 0;
 			int min = 0, max = 0;
 			Set<String> set = new TreeSet<String>();
 
@@ -55,17 +57,21 @@ public class ChunkTweetFile {
 				max = i + contract.getNumberOfTweetsPerFile();
 
 				int linePosition = new TweetFileChunker().process(file, set, min, max, contract.getNumberOfTweetsPerFile(), contract.getTargetFormat());
+				//				if (-1 != linePosition) continue;
+				//				if (set.size() < contract.getNumberOfTweetsPerFile()) continue;
 				if (-1 == linePosition || set.size() >= contract.getNumberOfTweetsPerFile()) {
-					writeToFile(contract, set, min, max);
+					actualLines += set.size();
+					writeToFile(contract, set, min, max, timer);
 					set = new TreeSet<String>();
 				}
 			}
 
-			writeToFile(contract, set, min, max);
+			writeToFile(contract, set, min, max, timer);
+			logger.info("File Reduction Results:\n\toriginal-number-of-lines = %s\n\tmodified-number-of-lines = %s", FileUtils.numberOfLines(file), actualLines);
 		}
 	}
 
-	private void writeToFile(ChunkTweetFileContract chunkTweetFileContract, Set<String> tweets, int min, int max) throws BusinessException {
+	private void writeToFile(ChunkTweetFileContract chunkTweetFileContract, Set<String> tweets, int min, int max, Stopwatch timer) throws BusinessException {
 
 		String name = getOutputFileName(chunkTweetFileContract);
 		String sMin = StringUtils.pad(min, 8);
@@ -75,7 +81,14 @@ public class ChunkTweetFile {
 
 		if (tweets.isEmpty()) return;
 
-		logger.info("Writing to file ... (actual-lines = %s, min = %s, max = %s, out-file-path = %s)", StringUtils.format(tweets.size()), StringUtils.format(min), ((Integer.MAX_VALUE == max) ? "*" : StringUtils.format(max)), outFilePath);
+		StringBuilder sb = new StringBuilder();
+		sb.append("Writing to file:");
+		sb.append(String.format("\n\tactual-lines:						%s", StringUtils.format(tweets.size())));
+		sb.append(String.format("\n\tmin:								%s", StringUtils.format(min)));
+		sb.append(String.format("\n\tmax:								%s", ((Integer.MAX_VALUE == max) ? "*" : StringUtils.format(max))));
+		sb.append(String.format("\n\tout-file-path:						%s", outFilePath));
+		sb.append(String.format("\n\tttotal-elapsed-time:				%s", timer.getTotalTime()));
+		logger.info("%s", sb.toString());
 
 		FileUtils.toFile(tweets, outFilePath, Codepage.UTF_8);
 	}
