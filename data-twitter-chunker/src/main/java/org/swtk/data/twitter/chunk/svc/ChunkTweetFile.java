@@ -56,7 +56,7 @@ public class ChunkTweetFile {
 				}
 			}
 
-			writeToFile(file, contract, set, min, max, timer);
+			if (set.size() > 1) writeToFile(file, contract, set, min, max, timer);
 			logger.info("%s", ChunkTweetFileLogger.fileReductionResults(file, actualLines));
 		}
 	}

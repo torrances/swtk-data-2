@@ -25,7 +25,6 @@
 	<modules>
 		<module>../data-twitter-core</module>
 		<module>../data-twitter-chunker</module>
-		<module>../data-twitter-gnip-parse</module>
 	</modules>
 
 	<properties>
@@ -42,11 +41,6 @@
 		<dependency>
 			<groupId>org.swtk.data.twitter.chunk</groupId>
 			<artifactId>data-twitter-chunker</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.swtk.data.twitter.gnip.parse</groupId>
-			<artifactId>data-twitter-gnip-parse</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 	</dependencies>

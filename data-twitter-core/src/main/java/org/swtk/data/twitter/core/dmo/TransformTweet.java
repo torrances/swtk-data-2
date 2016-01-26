@@ -85,6 +85,8 @@ public class TransformTweet {
 			/*	GNIP format	*/
 			if (text.startsWith("{\"id\":\"")) {
 				return GnipTweetAdapter.transform(text);
+			} else if (text.startsWith("{\"actor\"")) {
+				return GnipTweetAdapter.transform(text);
 			}
 
 		} catch (Exception e) {

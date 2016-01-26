@@ -15,8 +15,8 @@ public final class ChunkTweetFileLogger {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append("File Reduction Results:");
-		sb.append(String.format("\n\toriginal-number-of-lines:	%s", StringUtils.format(FileUtils.numberOfLines(file))));
-		sb.append(String.format("\n\tmodified-number-of-lines:	%s", StringUtils.format(actualLines)));
+		sb.append(String.format("\n\toriginal-number-of-lines:		%s", StringUtils.format(FileUtils.numberOfLines(file))));
+		sb.append(String.format("\n\tmodified-number-of-lines:		%s", StringUtils.format(actualLines)));
 		
 		return sb.toString();
 	}
