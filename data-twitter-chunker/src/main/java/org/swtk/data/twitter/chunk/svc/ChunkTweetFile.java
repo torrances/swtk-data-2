@@ -26,7 +26,7 @@ public class ChunkTweetFile {
 		for (File file : files)
 			totalNumberOfLines += FileUtils.numberOfLines(file);
 
-		logger.info("Read File (number-of-lines = %s, number-of-files = %s, time-to-read = %s)", StringUtils.format(totalNumberOfLines), StringUtils.format(files.size()), timer.getTotalTime());
+		logger.info("Read File (number-of-files = %s, number-of-lines = %s, time-to-read = %s)", StringUtils.format(files.size()), StringUtils.format(totalNumberOfLines), timer.getTotalTime());
 		return totalNumberOfLines;
 	}
 

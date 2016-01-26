@@ -34,7 +34,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>org.swtk.data.imdb.scrape.Runner</mainClass>
+							<mainClass>org.swtk.data.twitter.chunk.Runner</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>

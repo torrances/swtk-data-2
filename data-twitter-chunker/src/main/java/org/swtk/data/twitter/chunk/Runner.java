@@ -13,11 +13,11 @@ public final class Runner {
 	private static String echo(String... args) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("Incoming Paramters:\n");
-		sb.append(String.format("\t#1 (input-directory): 			%s", args[0]));
-		sb.append(String.format("\t#2 (output-directory): 			%s", args[1]));
-		sb.append(String.format("\t#3 (number-of-tweets-per-file): 	%s", args[2]));
-		sb.append(String.format("\t#4 (target-format): 				%s", args[3]));
+		sb.append("Incoming Paramters:");
+		sb.append(String.format("\n\t#1 (input-directory): 			%s", args[0]));
+		sb.append(String.format("\n\t#2 (output-directory): 			%s", args[1]));
+		sb.append(String.format("\n\t#3 (number-of-tweets-per-file): 	%s", args[2]));
+		sb.append(String.format("\n\t#4 (target-format): 			%s", args[3]));
 
 		return sb.toString();
 	}
@@ -25,19 +25,19 @@ public final class Runner {
 	private static String error(String... args) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("Expected 4 Paramters:\n");
-		sb.append("\t#1 (input-directory)");
-		sb.append("\t#2 (output-directory)");
-		sb.append("\t#3 (number-of-tweets-per-file)");
-		sb.append("\t#4 (target-format)");
+		sb.append("Expected 4 Paramters:");
+		sb.append("\n\t#1 input-directory");
+		sb.append("\n\t#2 output-directory");
+		sb.append("\n\t#3 number-of-tweets-per-file");
+		sb.append("\n\t#4 target-format");
 
 		return sb.toString();
 	}
 
 	public static void main(String... args) throws Throwable {
 
-		if (null != args) logger.info("%s", echo(args));
-		if (null == args || 4 != args.length) logger.info("%s", error(args));
+		if (null != args) logger.info("\n%s", echo(args));
+		if (null == args || 4 != args.length) logger.info("\n%s", error(args));
 
 		ChunkTweetFileContract chunkTweetFileContract = ChunkTweetFileContractAdapter.transform(args);
 		new ChunkTweetFile().process(chunkTweetFileContract);
