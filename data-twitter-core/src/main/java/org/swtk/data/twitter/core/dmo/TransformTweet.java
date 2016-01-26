@@ -6,6 +6,7 @@ import java.util.TreeSet;
 import org.swtk.data.twitter.core.dto.canonical.CannonicalTweet;
 import org.swtk.data.twitter.core.dto.gnip.GnipTweet;
 import org.swtk.data.twitter.core.dto.gnip.adapter.GnipTweetAdapter;
+import org.swtk.data.twitter.core.dto.tdc.TdcTweet;
 import org.swtk.eng.tokenizer.text.TextTokenizer;
 
 import com.trimc.blogger.commons.LogManager;
@@ -58,12 +59,24 @@ public class TransformTweet {
 				return toCannonicalForm(toGnipForm(text));
 			}
 
+			/*	if the GNIP file was deserialized to text; 
+			 * 	then re-serialized back to GNIP, 
+			 * 	then back to text, the ordering of elements changes ...  
+			 */
+			else if (text.startsWith("{\"actor\"")) {
+				return toCannonicalForm(toGnipForm(text));
+			}
+
 			return GsonUtils.toObject(text, CannonicalTweet.class);
 
 		} catch (Exception e) {
 			logger.error(e);
 			throw new BusinessException("Unable to deserialize tweet (target-format = 'cannonical', length = %s)", text.length());
 		}
+	}
+
+	public TdcTweet toTdcForm(String text) throws BusinessException {
+		throw new BusinessException("TDC Transformation not implemented yet");
 	}
 
 	public GnipTweet toGnipForm(String text) throws BusinessException {
@@ -73,7 +86,7 @@ public class TransformTweet {
 			if (text.startsWith("{\"id\":\"")) {
 				return GnipTweetAdapter.transform(text);
 			}
-			
+
 		} catch (Exception e) {
 			logger.error(e);
 		}

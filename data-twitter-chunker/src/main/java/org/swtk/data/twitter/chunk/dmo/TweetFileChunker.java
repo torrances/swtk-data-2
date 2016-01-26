@@ -78,24 +78,4 @@ public class TweetFileChunker {
 	private void toGnip(String strTweet, Set<String> set) throws BusinessException {
 		set.add(GnipTweetAdapter.toString(new TransformTweet().toGnipForm(strTweet)));
 	}
-
-	//	public void process(ChunkTweetFileContract chunkTweetFileContract) throws BusinessException {
-	//
-	//		Set<String> set = new TreeSet<String>();
-	//
-	//		for (File inputFile : chunkTweetFileContract.getInputFiles()) {
-	//			int linePosition = process(inputFile, set, chunkTweetFileContract.getNumberOfTweetsPerFile());
-	//		}
-	//
-	//		//		return set;
-	//	}
-	//
-	//	private String getOutputFileName(ChunkTweetFileContract chunkTweetFileContract) throws BusinessException {
-	//		StringBuilder sb = new StringBuilder();
-	//
-	//		for (File file : chunkTweetFileContract.getInputFiles())
-	//			sb.append(FileUtils.getName(file));
-	//
-	//		return String.valueOf(sb.toString().hashCode());
-	//	}
 }

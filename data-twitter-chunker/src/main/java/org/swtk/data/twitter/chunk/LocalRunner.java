@@ -13,12 +13,19 @@ public final class LocalRunner {
 		 * 
 		 */
 		
+//		 new ChunkTweetFile().process(
+//			ChunkTweetFileContractAdapter.transform(
+//				"/Users/craigtrim/data/Data/twitter/input", 
+//				"/Users/craigtrim/data/Data/twitter/output/", 
+//				"250000",
+//				"GNIP"));
+		 
 		 new ChunkTweetFile().process(
 			ChunkTweetFileContractAdapter.transform(
-				"/Users/craigtrim/data/Data/twitter/input", 
-				"/Users/craigtrim/data/Data/twitter/output/", 
+				"/Users/craigtrim/data/Data/twitter/output-1", 
+				"/Users/craigtrim/data/Data/twitter/output-2/", 
 				"250000",
-				"GNIP"));
+				"CANNONICAL"));
 		 
 		 // if this works, you can run a process of continuous reduction
 		 // but if you do, you should also target an output format similar to the incoming one
