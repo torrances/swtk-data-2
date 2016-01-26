@@ -19,7 +19,7 @@ public class TweetFileChunker {
 
 	public static LogManager logger = new LogManager(TweetFileChunker.class);
 
-	public int process(File inputFile, Set<String> set, int minLinePosition, int maxLinePosition, TwitterFormat targetFormat) throws BusinessException {
+	public int process(File inputFile, Set<String> set, int minLinePosition, int maxLinePosition, int totalTweetsPerFile, TwitterFormat targetFormat) throws BusinessException {
 		logger.info("\tInitiated Chunker (input-file = %s, current-set = %s, min-line-position = %s, max-line-position = %s)", inputFile.getAbsolutePath(), set.size(), minLinePosition, maxLinePosition);
 
 		int linePosition = 0;
@@ -33,7 +33,7 @@ public class TweetFileChunker {
 
 					linePosition++;
 					if (linePosition < minLinePosition) continue;
-					if (set.size() >= (maxLinePosition - minLinePosition)) return linePosition;
+					if (set.size() >= totalTweetsPerFile) return linePosition;
 
 					sb.append(StringUtils.trim(line));
 					if (!line.endsWith("}")) continue;

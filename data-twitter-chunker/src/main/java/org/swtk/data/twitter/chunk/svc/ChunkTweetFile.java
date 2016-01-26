@@ -39,29 +39,29 @@ public class ChunkTweetFile {
 		return String.valueOf(sb.toString().hashCode());
 	}
 
-	public void process(ChunkTweetFileContract chunkTweetFileContract) throws BusinessException {
+	public void process(ChunkTweetFileContract contract) throws BusinessException {
 
-		final long numberOfLines = getNumberOfLines(chunkTweetFileContract.getInputFiles());
+		final long numberOfLines = getNumberOfLines(contract.getInputFiles());
 
-		for (File file : chunkTweetFileContract.getInputFiles()) {
+		for (File file : contract.getInputFiles()) {
 			logger.info("Processing File: %s", file.getAbsolutePath());
 
 			int min = 0, max = 0;
 			Set<String> set = new TreeSet<String>();
 
-			for (int i = 0; i < numberOfLines; i += chunkTweetFileContract.getNumberOfTweetsPerFile()) {
+			for (int i = 0; i < numberOfLines; i += contract.getNumberOfTweetsPerFile()) {
 
 				min = i;
-				max = i + chunkTweetFileContract.getNumberOfTweetsPerFile();
+				max = i + contract.getNumberOfTweetsPerFile();
 
-				int linePosition = new TweetFileChunker().process(file, set, min, max, chunkTweetFileContract.getTargetFormat());
-				if (linePosition == -1) {
-					writeToFile(chunkTweetFileContract, set, min, max);
+				int linePosition = new TweetFileChunker().process(file, set, min, max, contract.getNumberOfTweetsPerFile(), contract.getTargetFormat());
+				if (-1 == linePosition || set.size() >= contract.getNumberOfTweetsPerFile()) {
+					writeToFile(contract, set, min, max);
 					set = new TreeSet<String>();
 				}
 			}
 
-			writeToFile(chunkTweetFileContract, set, min, max);
+			writeToFile(contract, set, min, max);
 		}
 	}
 
