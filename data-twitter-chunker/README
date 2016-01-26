@@ -1,0 +1,6 @@
+Usage:
+	1. 	build the jar by running "mvn clean build" from within "data-twitter-builder" in the terminal
+	2. 	run the jar with parameters
+		example:
+		java -cp target/uber-data-imdb-scrape-1.0.0.jar org.swtk.data.imdb.scrape.Runner <ID> <DIR>
+		java -cp target/uber-data-imdb-scrape-1.0.0.jar org.swtk.data.imdb.scrape.Runner 20 /Users/craigtrim/data/Data/imdb

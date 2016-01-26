@@ -44,20 +44,24 @@ public final class ChunkTweetFileContractAdapter {
 	}
 
 	public static ChunkTweetFileContract transform(String... args) throws AdapterValidationException {
-		if (4 != args.length) throw new AdapterValidationException("Expected 4 Parameters (input-file-directory, output-file-directory, number-of-tweets-per-file, output-format)");
+		if (4 != args.length) throw new AdapterValidationException("Invalid Parameter Set");
 
-		return transform(args[0], args[1], args[2]);
+		return transform(args[0], args[1], args[2], args[3]);
 	}
 
 	public static ChunkTweetFileContract transform(String inputFile, String outputFile, Integer numberOfTweetsPerFile, TwitterFormat targetFormat) throws AdapterValidationException {
 		return transform(new File(inputFile), new File(outputFile), numberOfTweetsPerFile, targetFormat);
 	}
 
-	public static ChunkTweetFileContract transform(String inputFile, String outputFile, String numberOfTweetsPerFile, TwitterFormat targetFormat) throws AdapterValidationException {
+	public static ChunkTweetFileContract transform(String inputFile, String outputFile, String strNumberOfTweetsPerFile, String strTargetFormat) throws AdapterValidationException {
 		try {
 
-			int nNumberOfTweetsPerFile = ("*".equals(numberOfTweetsPerFile)) ? Integer.MAX_VALUE : Integer.parseInt(numberOfTweetsPerFile);
-			return transform(inputFile, outputFile, nNumberOfTweetsPerFile, targetFormat);
+			int numberOfTweetsPerFile = ("*".equals(strNumberOfTweetsPerFile)) ? Integer.MAX_VALUE : Integer.parseInt(strNumberOfTweetsPerFile);
+			
+			TwitterFormat targetFormat = TwitterFormat.find(strTargetFormat);
+			if (null == targetFormat) throw new AdapterValidationException("Invalid Target Format (permissable-values = %s)", TwitterFormat.list());
+			
+			return transform(inputFile, outputFile, numberOfTweetsPerFile, targetFormat);
 
 		} catch (NumberFormatException e) {
 			throw new AdapterValidationException("Parameter Data Type (number-of-tweets) must be an Integer");
