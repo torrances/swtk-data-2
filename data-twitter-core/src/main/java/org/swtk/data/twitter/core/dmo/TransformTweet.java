@@ -9,33 +9,16 @@ import org.swtk.data.twitter.core.dto.gnip.adapter.GnipTweetAdapter;
 import org.swtk.eng.tokenizer.text.TextTokenizer;
 
 import com.trimc.blogger.commons.LogManager;
-import com.trimc.blogger.commons.exception.AdapterValidationException;
 import com.trimc.blogger.commons.exception.BusinessException;
 import com.trimc.blogger.commons.utils.GsonUtils;
 import com.trimc.blogger.commons.utils.TextUtils;
 import com.trimc.blogger.commons.utils.string.StringUtils;
 
-public class TransformGnipTweet {
+public class TransformTweet {
 
-	public static LogManager logger = new LogManager(TransformGnipTweet.class);
+	public static LogManager logger = new LogManager(TransformTweet.class);
 
-	public CannonicalTweet transform(String text) throws BusinessException {
-		try {
-
-			/*	GNIP format	*/
-			if (text.startsWith("{\"id\":\"")) {
-				return transform(GnipTweetAdapter.transform(text));
-			}
-
-			return GsonUtils.toObject(text, CannonicalTweet.class);
-
-		} catch (Exception e) {
-			logger.error(e);
-			throw new AdapterValidationException("Unable to deserialize tweet (expected-type = 'generic', length = %s)", text.length());
-		}
-	}
-
-	public CannonicalTweet transform(GnipTweet tweetGnip) throws BusinessException {
+	public CannonicalTweet toCannonicalForm(GnipTweet tweetGnip) throws BusinessException {
 		CannonicalTweet tweet = new CannonicalTweet();
 
 		tweet.setText(StringUtils.trim(tweetGnip.getBody()));
@@ -65,5 +48,36 @@ public class TransformGnipTweet {
 		tweet.setNormalizedNoHashtagsOrURLs(StringUtils.trim(sb.toString()));
 
 		return tweet;
+	}
+
+	public CannonicalTweet toCannonicalForm(String text) throws BusinessException {
+		try {
+
+			/*	GNIP format	*/
+			if (text.startsWith("{\"id\":\"")) {
+				return toCannonicalForm(toGnipForm(text));
+			}
+
+			return GsonUtils.toObject(text, CannonicalTweet.class);
+
+		} catch (Exception e) {
+			logger.error(e);
+			throw new BusinessException("Unable to deserialize tweet (target-format = 'cannonical', length = %s)", text.length());
+		}
+	}
+
+	public GnipTweet toGnipForm(String text) throws BusinessException {
+		try {
+
+			/*	GNIP format	*/
+			if (text.startsWith("{\"id\":\"")) {
+				return GnipTweetAdapter.transform(text);
+			}
+			
+		} catch (Exception e) {
+			logger.error(e);
+		}
+
+		throw new BusinessException("Unable to deserialize tweet (target-format = 'gnip', length = %s)", text.length());
 	}
 }

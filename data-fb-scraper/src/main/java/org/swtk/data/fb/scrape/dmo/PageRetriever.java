@@ -8,7 +8,6 @@ import com.gistlabs.mechanize.document.html.HtmlDocument;
 import com.gistlabs.mechanize.impl.MechanizeAgent;
 import com.trimc.blogger.commons.LogManager;
 import com.trimc.blogger.commons.exception.BusinessException;
-import com.trimc.blogger.commons.utils.MathUtils;
 
 public class PageRetriever {
 
@@ -31,7 +30,7 @@ public class PageRetriever {
 				page.saveTo(file);
 				logger.debug("Retrieved URL (url = %s, target-path = %s)", url, file.getAbsolutePath());
 
-				Thread.sleep(MathUtils.random(5500, 13500));
+				//				Thread.sleep(MathUtils.random(5500, 13500));
 			}
 
 		} catch (Exception e) {

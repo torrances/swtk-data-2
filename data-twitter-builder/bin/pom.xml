@@ -24,6 +24,7 @@
 
 	<modules>
 		<module>../data-twitter-core</module>
+		<module>../data-twitter-chunker</module>
 		<module>../data-twitter-gnip-parse</module>
 	</modules>
 
@@ -34,23 +35,18 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.swtk.data.imdb.core</groupId>
-			<artifactId>data-imdb-core</artifactId>
+			<groupId>org.swtk.data.twitter.core</groupId>
+			<artifactId>data-twitter-core</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 		<dependency>
-			<groupId>org.swtk.data.imdb.json</groupId>
-			<artifactId>data-imdb-json</artifactId>
+			<groupId>org.swtk.data.twitter.chunk</groupId>
+			<artifactId>data-twitter-chunker</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 		<dependency>
-			<groupId>org.swtk.data.imdb.scrape</groupId>
-			<artifactId>data-imdb-scrape</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.swtk.data.imdb.parse</groupId>
-			<artifactId>data-imdb-parse</artifactId>
+			<groupId>org.swtk.data.twitter.gnip.parse</groupId>
+			<artifactId>data-twitter-gnip-parse</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 	</dependencies>

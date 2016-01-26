@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import org.swtk.data.twitter.core.dmo.TransformGnipTweet;
+import org.swtk.data.twitter.core.dmo.TransformTweet;
 import org.swtk.data.twitter.core.dto.canonical.CannonicalTweet;
 
 import com.trimc.blogger.commons.LogManager;
@@ -50,7 +50,7 @@ public final class ParseDatFile {
 
 				try {
 
-					CannonicalTweet tweet = new TransformGnipTweet().transform(StringUtils.trim(sb.toString()));
+					CannonicalTweet tweet = new TransformTweet().toCannonicalForm(StringUtils.trim(sb.toString()));
 
 					String text = tweet.getNormalizedNoHashtagsOrURLs();
 					if (StringUtils.hasValue(text) && text.length() > 10) {

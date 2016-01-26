@@ -9,7 +9,8 @@ import org.swtk.data.twitter.core.dto.type.TwitterFormat;
  * @author craigtrim
  *
  * Purpose:
- * inputFileDirectory:		the directory of input twitter files in any format
+ * inputFileDirectory:		the directory of input twitter files 
+ * 							in any format (as long as that format is consistent across all files)
  * 							recognized formats are contained in {@link TwitterFormat}
  * outputFileDirectory:		the directory for chunked output files in a specified format
  * numberOfTweetsPerFile:	the number of tweets in each output file

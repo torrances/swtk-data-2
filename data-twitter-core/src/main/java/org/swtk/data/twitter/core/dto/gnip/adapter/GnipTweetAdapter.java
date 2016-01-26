@@ -10,6 +10,16 @@ public final class GnipTweetAdapter {
 
 	public static LogManager logger = new LogManager(GnipTweetAdapter.class);
 
+	public static String toString(GnipTweet gnipTweet) throws AdapterValidationException {
+		try {
+			return GsonUtils.toJsonSingleLineAll(gnipTweet);
+
+		} catch (Exception e) {
+			logger.error(e);
+			throw new AdapterValidationException("Unable to serialize tweet (expected-type = 'gnip', id = %s)", gnipTweet.getId());
+		}
+	}
+
 	public static GnipTweet transform(String text) throws AdapterValidationException {
 		try {
 			return GsonUtils.toObject(text, GnipTweet.class);

@@ -18,11 +18,11 @@ public final class ChunkTweetFileContractAdapter {
 		}
 
 		contract.setInputFiles(FileUtils.getFilesFromPath(inputFileDirectory));
-		
+
 		if (0 == contract.getInputFiles().size()) {
 			throw new AdapterValidationException("No input files found (path = %s)", inputFileDirectory.getAbsolutePath());
 		}
-		
+
 		contract.setOutputFilePathTemplate(outputFileDirectory.getAbsolutePath() + "/%s.dat");
 		contract.setOutputFileDirectory(outputFileDirectory);
 		contract.setTargetFormat(targetFormat);
@@ -55,9 +55,12 @@ public final class ChunkTweetFileContractAdapter {
 
 	public static ChunkTweetFileContract transform(String inputFile, String outputFile, String numberOfTweetsPerFile, TwitterFormat targetFormat) throws AdapterValidationException {
 		try {
-			return transform(inputFile, outputFile, Integer.parseInt(numberOfTweetsPerFile), targetFormat);
+
+			int nNumberOfTweetsPerFile = ("*".equals(numberOfTweetsPerFile)) ? Integer.MAX_VALUE : Integer.parseInt(numberOfTweetsPerFile);
+			return transform(inputFile, outputFile, nNumberOfTweetsPerFile, targetFormat);
+
 		} catch (NumberFormatException e) {
-			throw new AdapterValidationException("Parameter Data Type (number-of-data-types) must be an Integer");
+			throw new AdapterValidationException("Parameter Data Type (number-of-tweets) must be an Integer");
 		}
 	}
 }
