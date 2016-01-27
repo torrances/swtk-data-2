@@ -22,8 +22,8 @@ public final class LocalRunner {
 		 
 		 new ChunkTweetFile().process(
 			ChunkTweetFileContractAdapter.transform(
-				"/Users/craigtrim/data/Data/twitter/output-1", 
-				"/Users/craigtrim/data/Data/twitter/output-2/", 
+				"/Users/craigtrim/data/Data/twitter/input", 
+				"/Users/craigtrim/data/Data/twitter/output/", 
 				"250000",
 				"CANNONICAL"));
 		 

@@ -62,7 +62,7 @@ public class TweetFileChunker {
 		try {
 
 			CannonicalTweet tweet = new TransformTweet().toCannonicalForm(strTweet);
-			String text = tweet.getNormalizedNoHashtagsOrURLs();
+			String text = tweet.getText();
 
 			if (text.length() < 0) return;
 			if (!StringUtils.hasValue(text)) return;

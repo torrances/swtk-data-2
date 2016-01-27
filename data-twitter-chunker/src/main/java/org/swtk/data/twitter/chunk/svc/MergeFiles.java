@@ -20,7 +20,7 @@ public class MergeFiles {
 
 	public static void main(String... args) throws Throwable {
 		mergeIntoSingleFile(
-				"/Users/craigtrim/data/Data/twitter/output-2/", 
+				"/Users/craigtrim/data/Data/twitter/output/", 
 				"dat", 
 				Codepage.UTF_8, 
 				"/Users/craigtrim/workspaces/public/python/MinHash/input/", 
