@@ -15,6 +15,12 @@ public enum TwitterFormat {
 	GNIP,
 
 	/**
+	 * 	the local format for tweets
+	 * 	if a twitter HTML page is saved locally, this format will represent the parse results
+	 */
+	LOCAL,
+
+	/**
 	 * 	Cannonical form is specific to SWTK-data
 	 */
 	CANNONICAL;

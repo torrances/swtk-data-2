@@ -1,4 +1,4 @@
-package org.swtk.data.fb.scrape.dmo;
+package org.swtk.data.twitter.scraper.dmo;
 
 import java.io.File;
 
@@ -26,11 +26,6 @@ public class PageRetriever {
 			agent.setUserAgent(UserAgentProvider.getInstance().random());
 			HtmlDocument page = agent.get(url);
 
-			String text = page.saveToString();
-			if (text.contains("<title id=\"pageTitle\">Security Check Required")) {
-				throw new BusinessException("Rate Limited (url = %s, target-path = %s)", url, file.getAbsolutePath());
-			}
-
 			page.saveTo(file);
 			logger.debug("Retrieved URL (url = %s, target-path = %s)", url, file.getAbsolutePath());
 
@@ -42,8 +37,7 @@ public class PageRetriever {
 
 		{
 			logger.error(e);
-			throw new BusinessException("Couldn't retrieved URL (url = %s, target-path = %s)", url,
-					file.getAbsolutePath());
+			throw new BusinessException("Couldn't retrieved URL (url = %s, target-path = %s)", url, file.getAbsolutePath());
 		}
 	}
 }
