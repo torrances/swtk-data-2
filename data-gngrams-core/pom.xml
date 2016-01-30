@@ -2,15 +2,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.swtk.data.gngrams.mda</groupId>
-	<artifactId>data-gngrams-mda</artifactId>
+	<groupId>org.swtk.data.gngrams.core</groupId>
+	<artifactId>data-gngrams-core</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
 	<url />
-	<name>Gngrams MDA</name>
+	<name>Gngrams Core</name>
 	<inceptionYear>2015</inceptionYear>
-	<description>Gngrams MDA</description>
+	<description>Gngrams Core Project</description>
 
 	<build>
 		<plugins>
@@ -34,26 +34,11 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-			<version>1.8.3</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.4</version>
-		</dependency>
-		<dependency>
-			<groupId>com.gistlabs</groupId>
-			<artifactId>mechanize</artifactId>
-			<version>2.0.0-RC1</version>
-		</dependency>
-		<dependency>
-			<groupId>swtk-eng</groupId>
-			<artifactId>swtk-eng</artifactId>
+			<groupId>org.swtk.data.core</groupId>
+			<artifactId>data-core</artifactId>
 			<version>1.0.0</version>
-			<type>pom</type>
 		</dependency>
 	</dependencies>
 
 </project>
+  
