@@ -66,7 +66,7 @@ import redis.clients.jedis.Jedis;
 @Service
 public class GngramsParser {
 
-	private static final int	GNGRAM_PROCESS_THRESHOLD	= 10000;
+	private static final int	GNGRAM_PROCESS_THRESHOLD	= 100;
 
 	public static LogManager	logger						= new LogManager(GngramsParser.class);
 
@@ -98,6 +98,7 @@ public class GngramsParser {
 		}
 	}
 
+	// TODO: should have a contract with terms, ngram-type, file-save-loc, threshold
 	public void process(String term, NgramType ngramType) throws BusinessException {
 
 		jedis = new Jedis("localhost");
@@ -163,6 +164,6 @@ public class GngramsParser {
 		for (String key : jedis.keys(PATTERN))
 			sb.append(key + "\t" + jedis.get(key) + "\n");
 
-		FileUtils.toFile(sb, "/home/craig/output-" + term + ".dat", Codepage.UTF_8);
+		FileUtils.toFile(sb, "/Users/craigtrim/data/Data/GG-" + term + ".dat", Codepage.UTF_8);
 	}
 }

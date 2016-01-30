@@ -22,8 +22,13 @@ public class GngramParserTest {
 		return gngramParser;
 	}
 
-	@Test
+	// @Test
 	public void faith() throws Throwable {
 		getGngramsParser().process("faith", NgramType.TRIGRAM);
+	}
+
+	@Test
+	public void brahma() throws Throwable {
+		getGngramsParser().process("brahma", NgramType.UNIGRAM);
 	}
 }

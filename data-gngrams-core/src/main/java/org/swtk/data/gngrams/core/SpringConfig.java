@@ -10,7 +10,7 @@ import org.swtk.data.gngrams.core.dto.GngramsLocation;
 import com.trimc.blogger.commons.LogManager;
 
 @Configuration
-@ComponentScan("org.swtk.data.gngrams.core")
+@ComponentScan("org.swtk.data.gngrams")
 public class SpringConfig {
 
 	public static LogManager logger = new LogManager(SpringConfig.class);

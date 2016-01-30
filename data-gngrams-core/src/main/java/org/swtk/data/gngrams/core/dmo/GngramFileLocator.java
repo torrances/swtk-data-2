@@ -1,12 +1,11 @@
 package org.swtk.data.gngrams.core.dmo;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -29,8 +28,8 @@ public class GngramFileLocator {
 	@Autowired
 	GngramsLocation				gngramsLocation;
 
-	private void add(Map<String, List<File>> map, String index, File file) {
-		List<File> inner = (map.containsKey(index)) ? map.get(index) : new ArrayList<File>();
+	private void add(Map<String, Collection<File>> map, String index, File file) {
+		Collection<File> inner = (map.containsKey(index)) ? map.get(index) : new TreeSet<File>();
 		inner.add(file);
 		map.put(index, inner);
 	}
@@ -43,7 +42,7 @@ public class GngramFileLocator {
 		throw new AdapterValidationException("NgramType not recognized (value = %s)", ngramType);
 	}
 
-	private List<File> getFilesForSearching(Map<String, List<File>> map, String term) throws BusinessException {
+	private Collection<File> getFilesForSearching(Map<String, Collection<File>> map, String term) throws BusinessException {
 
 		if (term.length() > 2) {
 			String alpha = term.toLowerCase().substring(0, 2);
@@ -65,9 +64,11 @@ public class GngramFileLocator {
 	 * @param files
 	 * @return	an indexing map
 	 */
-	private Map<String, List<File>> indexFiles(Collection<File> files) {
-		Map<String, List<File>> map = new HashMap<String, List<File>>();
+	private Map<String, Collection<File>> indexFiles(Collection<File> files) {
+		Map<String, Collection<File>> map = new HashMap<String, Collection<File>>();
+
 		for (File file : files) {
+			if (file.getAbsolutePath().endsWith(".DS_Store")) continue;
 
 			String name = FileUtils.getName(file);
 			if (!name.contains("-")) logger.error("Unexpected File Name format (value = %s)", name);
@@ -82,21 +83,21 @@ public class GngramFileLocator {
 		return map;
 	}
 
-	public List<File> process(String term, NgramType ngramType) throws BusinessException {
+	public Collection<File> process(String term, NgramType ngramType) throws BusinessException {
 		String location = getFileLocation(ngramType);
 
 		Collection<File> files = FileUtils.getDescendantFilesInFolder(location, "*");
 		if (files.isEmpty()) throw new AdapterValidationException("No Files Found (location = %s)", location);
 
-		Map<String, List<File>> map = indexFiles(files);
+		Map<String, Collection<File>> map = indexFiles(files);
 
-		List<File> filesForSearching = getFilesForSearching(map, term);
+		Collection<File> filesForSearching = getFilesForSearching(map, term);
 		logger.info("Found Files for Searching (total = %s, term = %s)\n%s", filesForSearching.size(), term, toLogString(filesForSearching));
 
 		return filesForSearching;
 	}
 
-	private String toLogString(List<File> files) {
+	private String toLogString(Collection<File> files) {
 		StringBuilder sb = new StringBuilder();
 
 		Iterator<File> iter = files.iterator();
